@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!-- command: http-server ./ -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="The free, fast, and easy way to scan QR codes and barcodes online! No app required. Paste or upload a barcode image to read it instantly. Barcode reader supports QR code, UPC A, UPC E, EAN 8, EAN 13, Code 39, Code 93, Code 128, ITF, PDF 417, Aztec, Data Matrix, RSS 14, RSS Expanded, and MaxiCode.">
+    <meta name="author" content="">
+    <!-- CSS only -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,500,0,0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+
+  </head>
+<body>
+    <main role="main" class="container">
+      <div class="row" style="margin-top: 20px; justify-content: center;">
+        <div class="col-sm-6" id="primary_column"> 
+          <!--<div class="col-sm-auto" id="primary_column">
+        -->
+          <h2>Barcode & QR code scanner
+          </h2>
+          <h4 class="lead">Paste or upload an image of a barcode to read</h4>
+          
+            
+          
+        <form id="scan_form">
+        <!--         <form id="scan_form" method="post" enctype="multipart/form-data"> -->
+          <!--             <div id="reader" class="tt empty-reader-padding" data-bs-placement="bottom" data-bs-original-title="" style="position: relative; text-align: center; border-style: dashed; border-radius: 5px; border-color: #dedede; border-width: 2px; " width="692px" height="600px"> -->
+            <div id="reader" class="row tt empty-reader-padding" data-bs-placement="bottom" data-bs-original-title="" style="margin-left: 0px; margin-right: 0px; margin-top: 20px; position: relative; text-align: center; border-style: dashed; border-radius: 5px; border-color: #dedede; border-width: 2px; "  height="600px">
+            <div id="controls">
+              <input type="file" id="input-file" accept="image/*" style="display:none" >
+              <input type="button" id="uploadButton" class = "btn btn-secondary btn-sm" value="Upload" onclick="document.getElementById('input-file').click();"/>
+              <!--<button id="uploadButton" class="btn btn-secondary btn-sm" onclick="document.getElementById('input-file').click();" style="margin:5px"><span class="material-symbols-outlined" style="vertical-align: middle;"> Upload </span><span style="vertical-align: middle;padding-left: 4px;">Upload</span></button>-->
+              <div id="pasteButton" class="btn btn-secondary btn-sm tt" onclick="console.log('paste button pressed'); pasteImage();" data-bs-placement="right" data-bs-original-title="" style="margin:5px" ><span class="material-symbols-rounded"style="vertical-align: middle;">content_paste</span><span style="vertical-align: middle;padding-left: 4px;">Paste</span></button>
+            </div>
+            <div id="orDragLabels" style="color:#808080; ">
+              <p style="margin-bottom: 0px;font-weight: 100">or</p>
+              <p style="font-weight: 100">drag a barcode image here</p>
+            </div>
+            </div>
+        </form>
+      
+      </div>
+        </div>
+
+        <!-- Overlap issue: large breakpoint (992px wide), medium breakpoint (768px), then no overlap for small devices (576px and lower)-->
+
+        <!-- grid of example barcodes, don't know if i'll use it  
+        <div class="row mt-4">
+      <div class="col-sm-12">
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          View supported code formats
+        </button>
+      <div class="collapse" id="collapseExample">
+        <div class="row mt-4">
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">QR code</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">UPC A</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">UPC E</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">EAN 8</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">EAN 13</p>
+              </div>
+            </div>
+          </div>
+          </div>
+        <div class="row mt-4">
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Code 39</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Code 93</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Code 128</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">ITF</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">PDF 417</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Aztec</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Data Matrix</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Maxicode</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">RSS 14</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">RSS Expanded</p>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  -->
+
+    </main><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+ <!-- <script type="module" src="/node_modules/html5-qrcode/es2015/html5-qrcode.js" ></script>file that i modified-->
+ <script src="node_modules/html5-qrcode/html5-qrcode.min.js"></script>
+<!-- for use in browser without module loader (not using bc modified code) <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script> -->
+<script src="/script.js" type="text/javascript"></script>
+
+</body>
