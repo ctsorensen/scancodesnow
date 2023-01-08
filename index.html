@@ -17,29 +17,24 @@
   </head>
 <body>
     <main role="main" class="container">
-      <div class="row" style="margin-top: 20px; justify-content: center;">
-        <div class="col-sm-6" id="primary_column"> 
-          <!--<div class="col-sm-auto" id="primary_column">
-        -->
+      <div class="row" id="main-row">
+        <div class="col-auto" id="primary_column"> 
           <h2>Barcode & QR code scanner
           </h2>
-          <h4 class="lead">Paste or upload an image of a barcode to read</h4>
-          
-            
+          <p class="subtitle">Upload or paste a barcode image to read</p>          
           
         <form id="scan_form">
-        <!--         <form id="scan_form" method="post" enctype="multipart/form-data"> -->
-          <!--             <div id="reader" class="tt empty-reader-padding" data-bs-placement="bottom" data-bs-original-title="" style="position: relative; text-align: center; border-style: dashed; border-radius: 5px; border-color: #dedede; border-width: 2px; " width="692px" height="600px"> -->
-            <div id="reader" class="row tt empty-reader-padding" data-bs-placement="bottom" data-bs-original-title="" style="margin-left: 0px; margin-right: 0px; margin-top: 20px; position: relative; text-align: center; border-style: dashed; border-radius: 5px; border-color: #dedede; border-width: 2px; "  height="600px">
+            <div id="reader" class="row tt empty-reader-padding align-self-center" data-bs-placement="bottom" data-bs-original-title="" style="text-align: center;">
             <div id="controls">
-              <input type="file" id="input-file" accept="image/*" style="display:none" >
-              <input type="button" id="uploadButton" class = "btn btn-secondary btn-sm" value="Upload" onclick="document.getElementById('input-file').click();"/>
-              <!--<button id="uploadButton" class="btn btn-secondary btn-sm" onclick="document.getElementById('input-file').click();" style="margin:5px"><span class="material-symbols-outlined" style="vertical-align: middle;"> Upload </span><span style="vertical-align: middle;padding-left: 4px;">Upload</span></button>-->
-              <div id="pasteButton" class="btn btn-secondary btn-sm tt" onclick="console.log('paste button pressed'); pasteImage();" data-bs-placement="right" data-bs-original-title="" style="margin:5px" ><span class="material-symbols-rounded"style="vertical-align: middle;">content_paste</span><span style="vertical-align: middle;padding-left: 4px;">Paste</span></button>
+              <input type="file" id="input-file" accept="image/*" class="d-none" >
+              <input type="button" id="upload-button" class = "btn btn-secondary btn-sm" value="Upload" onclick="document.getElementById('input-file').click();"/>
+              <div id="paste-button" class="btn btn-secondary btn-sm tt" onclick="pasteImage();" data-bs-placement="right" data-bs-original-title=""><span id="paste-button-label">Paste</span></div>
+
+              <!-- <div id="paste-button" class="btn btn-secondary btn-sm tt" onclick="console.log('paste button pressed'); pasteImage();" data-bs-placement="right" data-bs-original-title="" ><span class="material-symbols-rounded button-icon">content_paste</span><span id="paste-button-label">Paste</span></div> -->
             </div>
-            <div id="orDragLabels" style="color:#808080; ">
-              <p style="margin-bottom: 0px;font-weight: 100">or</p>
-              <p style="font-weight: 100">drag a barcode image here</p>
+            <div id="or-drag-labels">
+              <!-- <p class="or-drag-labels"></p> -->
+              <p class="or-drag-labels">or drag a barcode image here</p>
             </div>
             </div>
         </form>
@@ -47,145 +42,7 @@
       </div>
         </div>
 
-        <!-- Overlap issue: large breakpoint (992px wide), medium breakpoint (768px), then no overlap for small devices (576px and lower)-->
 
-        <!-- grid of example barcodes, don't know if i'll use it  
-        <div class="row mt-4">
-      <div class="col-sm-12">
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          View supported code formats
-        </button>
-      <div class="collapse" id="collapseExample">
-        <div class="row mt-4">
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">QR code</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">UPC A</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">UPC E</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">EAN 8</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">EAN 13</p>
-              </div>
-            </div>
-          </div>
-          </div>
-        <div class="row mt-4">
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">Code 39</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">Code 93</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">Code 128</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">ITF</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">PDF 417</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">Aztec</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">Data Matrix</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">Maxicode</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">RSS 14</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">RSS Expanded</p>
-              </div>
-            </div>
-          </div>
-          </div>
-      </div>
-      </div>
-    </div>
-  -->
 
     </main><!-- /.container -->
 

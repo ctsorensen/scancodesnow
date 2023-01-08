@@ -1,15 +1,19 @@
 
 /*
 TODO
-- hover, clicked states for all buttons
-- on paste, if not image, show some feedback, tooltip in pasteImage function
-- paste from clipboard button
-     - try to get around extra context menu paste for Safari
-     - hide for firefox, not clipboard.read not supported. Or tooltip?. Check if functionality supported, if not, disable button and show tooltip on hover.
-        - "This button isn't supported on this a browser. Try antoher"
-- download fonts and icons so they don't load in after a second. Annoying.
+9622030630000157233000680940014097
+- copy button icon
+- just pin copy button to right.
+- smallest viewport 320px wide, scale font so one line?
+- Button spacing/sizing consistency. Hover, clicked states for all buttons. 
+- Clean up and annotate JS file
+- Reword: "Pasted data is not an image"
+- download fonts so they don't load in after a second. Annoying.
 - uploading barcode to small screen makes scanning worse (idk what can be done)
-- If not successful, show some sort of tip to make sure it's cropped properly. 'Make sure the barcode is the most visible part of the image' or smthng
+- error messages:
+-     there's only 1 error: message should say a few things: make sure it's the correct format (with ability for examples?), make sure it's horizontal, make sure barcode is clearly visible and not blurry.  without anything else around it.
+-     modal for examples. Launch from button in error. 2x2 cards. https://getbootstrap.com/docs/5.0/components/modal/ scrolling long content.
+
 -Solved? safari executes a change event on paste, now its pasting double :( ) -- new safari (15 doesn't do this)
 
 
@@ -27,10 +31,10 @@ const html5QrCode = new Html5Qrcode(/* element id */ "reader",); /*createCanvasE
 // File based scanning
 
 const fileInput = document.getElementById('input-file');
-const uploadButton = document.getElementById('uploadButton');
-const pasteButton = document.getElementById('pasteButton');
+const uploadButton = document.getElementById('upload-button');
+const pasteButton = document.getElementById('paste-button');
 const controls = document.getElementById('controls');
-const orDragLabels = document.getElementById('orDragLabels');
+const orDragLabels = document.getElementById('or-drag-labels');
 
 var pasteButtonSupported;
 
@@ -44,21 +48,34 @@ window.addEventListener("load", (event) => {
    }));
   });
   ///check if clipboard-write is supported (all but Firefox)
-    const clipboardReadPermission = navigator.permissions.query({ name: 'clipboard-read' })
+    const clipboardReadPermission = navigator.permissions.query({name: 'clipboard-read' })
     .then((permissionObj)=> {
       //check permission object
       if(permissionObj.state === 'granted'){
         console.log('granted');
         pasteButtonSupported = true;
+        if(pasteButtonSupported == false){
+          pasteButton.classList.add('d-none');
+        } else if(pasteButton.classList.contains('d-none')){
+          pasteButton.classList.remove('d-none');
+        }{
+         
+        }
       } else if(permissionObj.state === 'denied'){
         console.log('clipboard-read permission denied');
         pasteButtonSupported = false;
+        if(pasteButtonSupported == false){
+          pasteButton.classList.add('d-none');
+        }
       }
     })
     .catch((error)=> {
       //couldn't query permission ... not supported
       console.log('clipboard-read not supported');
       pasteButtonSupported = false;
+      if(pasteButtonSupported == false){
+        pasteButton.classList.add('d-none');
+      }
       //console.error("error message: "+error);
     });
   });
@@ -89,31 +106,35 @@ fileInput.addEventListener('change', e => {
 
   console.log('file selected');
   const imageFile = e.target.files[0];
-  var scanSuccessShowing = document.getElementById('scan_success_section');
+  var scanSuccessShowing = document.getElementById('scan-success-section');
 
   //scan
   html5QrCode.scanFile(imageFile, true)
   .then(decodedText => {
   
-    if (document.getElementById('scan_error_section') != null){
+    if (document.getElementById('scan-error-section') != null){
       //if error already showing, remove it
       console.log('removing error message');
-      const errorToRemove = document.getElementById('scan_error_section');
+      const errorToRemove = document.getElementById('scan-error-section');
       errorToRemove.remove();
     }
 
     
     if (scanSuccessShowing == null) {
-      //scan_success_section doesn't already exist, need to create
+      //scan-success-section doesn't already exist, need to create
+      ///the problem!!!! When this is created, it goes way too wide.
       console.log('scan success section does not exist, creating...');
 
       const successfulScan = document.createElement("div");
-      successfulScan.id = 'scan_success_section';
+      successfulScan.id = 'scan-success-section';
+      // successfulScan.style.minWidth = '100%';
+      // successfulScan.style.width = '0';
+     
       successfulScan.classList = 'animate__animated animate__fadeInDown';
       const scanForm = document.getElementById('scan_form');
       const primaryColumn = document.getElementById('primary_column');
       
-      successfulScan.innerHTML = '<p id="scan_success_label">Scan result</p><div id="scan_success"><div class="row"><div class="col my-auto" style=""><p id="scanOutput" class=""style="text-align:left; display: inline; word-wrap: break-word; word-break: break-all; user-select: all ">'+decodedText+'</p></div><div class="col-sm-auto align-self-center" style=""><button data-container="body" id="copyButton" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title=""><span class="material-symbols-rounded" style="vertical-align: middle;"> content_copy </span>Copy</button></div></div></div>';
+      successfulScan.innerHTML = '<p id="scan-success-label">Scan result</p><div id="scan-success"><div class="row"><div class="col my-auto"><p id="scan-success-output">'+decodedText+'</p></div><div class="col-sm-auto align-self-center"><button data-container="body" id="copy-button" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title="">Copy</div></button></div></div>';
       
       primaryColumn.insertBefore(successfulScan, scanForm.nextSibling );
 
@@ -122,22 +143,22 @@ fileInput.addEventListener('change', e => {
       new bootstrap.Tooltip(t,({
         trigger: 'manual',
         container: 'body'
-    }));
-});
+        }));
+      }); 
     } else if (scanSuccessShowing != null){
-      //scan_success_section does exist, remove it and replace with a new one (so it animates in)
+      //scan-success-section does exist, remove it and replace with a new one (so it animates in)
       console.log('scan success section exists, replacing...');
 
-      const scanSuccessToRemove = document.getElementById('scan_success_section');
+      const scanSuccessToRemove = document.getElementById('scan-success-section');
       scanSuccessToRemove.remove();
 
       const successfulScan = document.createElement("div");
-      successfulScan.id = 'scan_success_section';
+      successfulScan.id = 'scan-success-section';
       successfulScan.classList = 'animate__animated animate__fadeInDown';
       const scanForm = document.getElementById('scan_form');
       const primaryColumn = document.getElementById('primary_column');
       
-      successfulScan.innerHTML = '<p id="scan_success_label">Scan result</p><div id="scan_success"><div class="row"><div class="col my-auto" style=""><p id="scanOutput" class=""style="text-align:left; display: inline; word-wrap: break-word; word-break: break-all; user-select: all ">'+decodedText+'</p></div><div class="col-sm-auto align-self-center" style="justify-content:"><button data-container="body" id="copyButton" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title=""><span class="material-symbols-rounded" style="vertical-align: middle;"> content_copy </span>Copy</button></div></div></div>';
+      successfulScan.innerHTML = '<p id="scan-success-label">Scan result</p><div id="scan-success"><div class="row"><div class="col my-auto"><p id="scan-success-output">'+decodedText+'</p></div><div class="col-sm-auto align-self-center"><button data-container="body" id="copy-button" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title="">Copy</div></div></div></div>';
       
       primaryColumn.insertBefore(successfulScan, scanForm.nextSibling );
 
@@ -155,28 +176,28 @@ fileInput.addEventListener('change', e => {
     // failure, handle it.
     console.log('error');
     //checking if an error is already showing, if so, remove it.
-    if (document.getElementById('scan_error_section') != null){
+    if (document.getElementById('scan-error-section') != null){
       console.log('removing error message');
-      const errorToRemove = document.getElementById('scan_error_section');
+      const errorToRemove = document.getElementById('scan-error-section');
       errorToRemove.remove();
     }
 
-    //checking if a scan_success is already showing, if so, remove it.
-    if(document.getElementById('scan_success_section')){
+    //checking if a scan-success is already showing, if so, remove it.
+    if(document.getElementById('scan-success-section')){
       console.log('removing previous scan success section');
-      const scanSuccessToRemove = document.getElementById('scan_success_section');
+      const scanSuccessToRemove = document.getElementById('scan-success-section');
       scanSuccessToRemove.remove();
     }
 
     console.log('scan failure');
     const scanError = document.createElement("div");
-    scanError.id = 'scan_error_section';
+    scanError.id = 'scan-error-section';
     scanError.classList = 'animate__animated animate__fadeInDown';
     const scanForm = document.getElementById('scan_form');
     const primaryColumn = document.getElementById('primary_column');
     const formattedError = String(error);
     //scanError.innerHTML = '<div>Error scanning file. Please ensure the barcode is clearly visible and distinguishable. '+formattedError+'</div>';
-    scanError.innerHTML = '<p id="scan_error_label">Scan error</p><div id="scan_error">'+formattedError+'</div>';
+    scanError.innerHTML = '<p id="scan-error-label">Scan error</p><div id="scan-error">'+'hello ' + formattedError+'</div>';
     primaryColumn.insertBefore(scanError, scanForm.nextSibling );
     console.log(`Error scanning file. Reason: ${error}`);
   });
@@ -208,7 +229,7 @@ async function pasteImage() {
   // function for paste button.
   
   console.log("pasteImage");
-  console.log('is pasteButton supported?: '+pasteButtonSupported.toString());
+  console.log('is paste button supported?: '+pasteButtonSupported.toString());
 
   try {
     console.log('try1');
@@ -218,7 +239,7 @@ async function pasteImage() {
     for (const item of clipboardContents) {
       if (!item.types.includes('image/png')) {
 
-        const elem = document.getElementById('pasteButton');
+        const elem = document.getElementById('paste-button');
 
         const tooltip = bootstrap.Tooltip.getInstance(elem);
       
@@ -254,10 +275,10 @@ async function pasteImage() {
   }
 }
 function copyScanOutput(){
-  ///copies from the #scanOutput element
+  ///copies from the #scan_output element
   try {
-    const element = document.getElementById("scanOutput");
-    const elem = document.getElementById("copyButton");
+    const element = document.getElementById("scan-success-output");
+    const elem = document.getElementById("copy-button");
 
     navigator.clipboard.writeText
                 (element.innerText);
@@ -284,8 +305,12 @@ const resizeCanvasObserver = new MutationObserver(function(mutations_list) {
 			if(added_node.id == 'qr-canvas-visible') {
 				console.log('qr-canvas-visible has been added');
         let canvas = document.getElementById('qr-canvas-visible');
-        canvas.style.width = "100%";
-        canvas.style.height = "auto";
+        console.log('current width: '+canvas.style.width.toString());
+        canvas.style.width = "auto";
+        console.log('width to auto');
+        canvas.style.height = "100%";
+        console.log('current width: '+canvas.style.width.toString());
+
         canvas.classList.add('animate__animated');
         canvas.classList.add('animate__fadeIn');
         reader.classList.remove('empty-reader-padding');
@@ -366,14 +391,15 @@ function handleDrop(e) {
 
 function createResetButton() {
   const button = document.createElement('button');
-  button.id ='resetButton';
+  button.id ='reset-button';
   button.type = 'button';
   button.className = "btn btn-secondary btn-sm";
-  button.style = "position:absolute; top:8px; right: 8px; --bs-btn-padding-x: 0.25rem; z-index: 1; width:inherit";
+  // button.style = "position:absolute; top:8px; right: 8px; --bs-btn-padding-x: 0.25rem; z-index: 1; width:inherit; color: #ffffff;  background-color: #585858; border-color: #585858; border-radius: 3;";
+  
   button.onclick = function() {
     reset();
   }
-  button.innerHTML = "<span class='material-symbols-rounded' style='vertical-align: middle;'>delete</span>";
+  //button.innerHTML = "<span class='material-symbols-rounded button-icon'>delete</span>";
   return button;
 }
 
@@ -388,16 +414,16 @@ function reset() {
   reader.classList.add("empty-reader-padding");
   fileInput.value = '';
 
-  if (document.getElementById('scan_error_section') != null){
+  if (document.getElementById('scan-error-section') != null){
     console.log('removing error message');
-    const errorToRemove = document.getElementById('scan_error_section');
+    const errorToRemove = document.getElementById('scan-error-section');
     errorToRemove.remove();
   }
 
-  //checking if a scan_success is already showing, if so, remove it.
-  if(document.getElementById('scan_success_section')){
+  //checking if a scan-success is already showing, if so, remove it.
+  if(document.getElementById('scan-success-section')){
     console.log('removing previous scan success section');
-    const scanSuccessToRemove = document.getElementById('scan_success_section');
+    const scanSuccessToRemove = document.getElementById('scan-success-section');
     scanSuccessToRemove.remove();
   }
 }

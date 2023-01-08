@@ -1,36 +1,82 @@
+html, body {
+  background-color: #ffffff;
+}
+
 h1, h2, h3 {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 600;
+  color: #221F26;
 }
 
-#scan_success_section {
+p {
+  margin-top: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.empty-reader-padding{
+  padding: 2rem;
+}
+
+.filled-reader-padding{
+  padding:.5rem;
+}
+
+.subtitle {
+  font-size: 1.0rem;
+  color: #221F26;
+  /* font-weight: 400; */
+}
+
+.button-icon {
+  vertical-align: middle;
+}
+
+#main-row {
+  margin-top: 20px; 
+  justify-content: center;
+}
+
+
+#scan-success-section {
   margin-top: 20px;
+  z-index: 0;
 }
 
-
-#scan_success {
-    border-width: 2px;
-    border-radius: 5px;
-    margin-top: 5px;
-    font-size:medium;
-    color: #0F5132;
-    border-color: #BADBCC; /* not working*/
-    background-color: #D1E7DD;
-    padding: 10px;
+#scan-success {
+  min-width: 100%;
+  width: 0;
+  border-width: 2px;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-size:medium;
+  color: #0F5132;
+  border-color: #BADBCC; /* not working*/
+  background-color: #D1E7DD;
+  padding: 10px;
+    
 }
 
-#scan_success_label {
+#scan-success-label {
   color: #0F5132;
   font-size: large;
   font-weight: 600;
   margin-bottom:0;
 }
 
-#scan_error_section {
-  margin-top: 20px;
+#scan-success-output {
+  text-align:left; 
+  display: inline; 
+  word-wrap: break-word; 
+  word-break: break-all; 
+  user-select: all;
 }
 
-#scan_error {
+#scan-error-section {
+  margin-top: 20px;
+  z-index: 0; 
+}
+
+#scan-error {
     border-width: 2px;
     border-radius: 5px;
     margin-top: 5px;
@@ -41,55 +87,28 @@ h1, h2, h3 {
     padding: 10px;
 }
 
-#scan_error_label {
+#scan-error-label {
   color: #721C24;
   font-size: large;
   font-weight: 600;
   margin-bottom: 0;
 }
 
-.empty-reader-padding{
-    padding: 2rem;
-}
+#copy-button {
+  /* color: #ffffff;
+  background-color: #0F5132;
+  border-color: #0F5132;
+  border-radius: 3;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500; */
 
-.filled-reader-padding{
-    padding:.5rem;
-}
-
-.hide {
-  display:none;
-}
-
-.show {
-  display: inline-block;
-}
-
-#copyButton {
   color: #ffffff;
   background-color: #0F5132;
   border-color: #0F5132;
   border-radius: 3;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 500;
-}
-
-#pasteButton {
-  color: #ffffff;
-  background-color: #585858;
-  border-color: #585858;
-  border-radius: 3;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 500;
-}
-
-#uploadButton {
-  color: #ffffff;
-  background-color: #585858;
-  border-color: #585858;
-  border-radius: 3;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 500;
-  background-image: url(/Icons/white_upload_FILL0_wght400_GRAD0_opsz48.svg);
+  background-image: url(/Icons/content_copy_FILL0_wght400_GRAD0_opsz48.svg);
   background-repeat: no-repeat;
   background-size: 24px 24px;
   background-position: 5px 50%;
@@ -100,51 +119,110 @@ h1, h2, h3 {
   text-align: left;
   border-width: 1px;
   margin: 5px;
+  z-index: 2; 
 }
 
-/*
+#paste-button {
+  color: #ffffff;
+  background-color: #585858;
+  border-color: #585858;
+  border-radius: 3;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  background-image: url(/Icons/content_paste_FILL0_wght400_GRAD0_opsz48.svg);
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  background-position: 5px 50%;
+  padding-left:33px;
+  padding-top: 5.615px;
+  padding-bottom: 5.615px;
+  padding-right: 8px;
+  text-align: left;
+  border-width: 1px;
+  margin: 5px;
+  z-index: 2; 
+}
+
+#upload-button {
+  color: #ffffff;
+  background-color: #585858;
+  border-color: #585858;
+  border-radius: 3;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  background-image: url(/Icons/upload_FILL0_wght400_GRAD0_opsz48.svg);
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  background-position: 5px 50%;
+  padding-left:33px;
+  padding-top: 5.615px;
+  padding-bottom: 5.615px;
+  padding-right: 8px;
+  text-align: left;
+  border-width: 1px;
+  margin: 5px;
+  z-index: 2; 
+}
+
+#reset-button {
+  background-image: url(/Icons//delete_FILL0_wght400_GRAD0_opsz48\ \(1\).svg);
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position:50%;
+  position:absolute; 
+  top:8px; right: 8px; 
+  /* --bs-btn-padding-x: 0.25rem;  */
+  z-index: 2; 
+  width:32.219px; 
+  height:32.219px; 
+  color: #ffffff;  
+  background-color: #585858; 
+  border-color: #585858; 
+  border-radius: 3;
+  border-width: 2;
+}
+
+.or-drag-labels {
+  color:#757575; 
+  font-weight: 100;
+  padding-top:4px;
+  margin-bottom: 0px;
+  font-size: .8rem;
+}
+
+#qr-canvas-visible {
+  /*removing horizontal padding slightly helps scan accuracy*/
+  padding-left: 0;
+  padding-right:0;
+}
+
 #reader{
-    border: 2px dashed #ccc;
-    border-radius: 20px;
-    width: 480px;
-    font-family: sans-serif;
-    margin: 100px auto;
-    padding: 20px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 20px; 
+  position: relative; 
+  text-align: center; 
+  border-style: dashed; 
+  border-radius: 5px; 
+  border-color: #dedede; 
+  border-width: 2px;
+  background-color: #FFFFFF;
+  z-index: 1;
   }
-  */
+  
   #reader.highlight {
     background-color:aliceblue;
   }
-  p {
-    margin-top: 0;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
-  .my-form {
-    margin-bottom: 10px;
-  }
-  /*
-  #gallery {
-    margin-top: 10px;
-  }
-  #gallery img {
-    width: 150px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-  .button {
-    display: inline-block;
-    padding: 10px;
-    background: #ccc;
-    cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  .button:hover {
-    background: #ddd;
-  }
-  */
-  #fileElem {
-    display: none;
-  }
+
+  /* 
+Set this style programmatically in script.js, not sure why but it isn't working otherwise. (Button too wide)
+#reset-button{
+  position:absolute; 
+  top:8px; 
+  right: 8px; 
+  --bs-btn-padding-x: 0.25rem; 
+  z-index: 1; 
+  width:inherit
+} */
+
   
