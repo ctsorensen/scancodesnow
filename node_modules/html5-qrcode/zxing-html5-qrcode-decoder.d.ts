@@ -11,4 +11,5 @@ export declare class ZXingHtml5QrcodeDecoder implements QrcodeDecoderAsync {
     private createReverseFormatMap;
     private toHtml5QrcodeSupportedFormats;
     private createZXingFormats;
+    private createDebugData;
 }

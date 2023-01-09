@@ -12,4 +12,5 @@ export declare class BarcodeDetectorDelegate implements QrcodeDecoderAsync {
     private createBarcodeDetectorFormats;
     private toHtml5QrcodeSupportedFormats;
     private createReverseFormatMap;
+    private createDebugData;
 }

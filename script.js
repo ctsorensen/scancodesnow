@@ -1,7 +1,8 @@
 
 /*
 TODO
-
+- create scancodesnow.com examples for all formats
+- scan error label alignment is different from scan success
 - just pin copy button to right.
 - smallest viewport 320px wide, scale font so one line?
 - Button spacing/sizing consistency. Hover, clicked states for all buttons. 
@@ -11,6 +12,9 @@ TODO
 - error messages:
 -     there's only 1 error: message should say a few things: make sure it's the correct format (with ability for examples?), make sure it's horizontal, make sure barcode is clearly visible and not blurry.  without anything else around it.
 -     modal for examples. Launch from button in error. 2x2 cards. https://getbootstrap.com/docs/5.0/components/modal/ scrolling long content.
+- NOPE, gotta fix: when adding a file, ui jumps b/c col-auto resizing. Wanted to try to maximize the canvas size within reason, so that scanning is more accurate from the library
+
+
 
 -Solved? safari executes a change event on paste, now its pasting double :( ) -- new safari (15 doesn't do this)
 
@@ -19,8 +23,6 @@ NOT POSSIBLE
 - allow to right click paste from context menu,
 
 
-Acknowledgements:
-- when adding a file, ui jumps b/c col-auto resizing. Wanted to try to maximize the canvas size within reason, so that scanning is more accurate from the library
 */
 
 
@@ -208,9 +210,12 @@ fileInput.addEventListener('change', e => {
     scanError.classList = 'animate__animated animate__fadeInDown';
     const scanForm = document.getElementById('scan_form');
     const primaryColumn = document.getElementById('primary_column');
-    const formattedError = String(error);
+    //note: Seems to be only one error from HTML5QR code library on scan failure and it's not very helpful. Replacing it.
+    //const formattedError = String(error);
+    const formattedError = "<p>Make sure the barcode you want to scan is large, clearly visible, and one of the <a id='supported-formats-text' href='#' data-bs-toggle='modal' data-bs-target='#supportedFormatsModal'>supported formats</a>.</p>"
+
     //scanError.innerHTML = '<div>Error scanning file. Please ensure the barcode is clearly visible and distinguishable. '+formattedError+'</div>';
-    scanError.innerHTML = '<p id="scan-error-label">Scan error</p><div id="scan-error">'+'hello ' + formattedError+'</div>';
+    scanError.innerHTML = '<p id="scan-error-label">Scan error</p><div id="scan-error">'+ formattedError+'</div>';
     primaryColumn.insertBefore(scanError, scanForm.nextSibling );
     console.log(`Error scanning file. Reason: ${error}`);
   });

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="The free, fast, and easy way to scan QR codes and barcodes online! No app required. Paste or upload a barcode image to read it instantly. Barcode reader supports QR code, UPC A, UPC E, EAN 8, EAN 13, Code 39, Code 93, Code 128, ITF, PDF 417, Aztec, Data Matrix, RSS 14, RSS Expanded, and MaxiCode.">
+    <meta name="description" content="The free, fast, and easy way to scan QR codes and barcodes online! No app required. Paste or upload a barcode image to read it instantly. Barcode reader supports QR code, UPC A, UPC E, EAN 8, EAN 13, Code 39, Code 93, Code 128, ITF, PDF 417, Aztec Code, Data Matrix, RSS 14, RSS Expanded, and MaxiCode.">
     <meta name="author" content="">
     <!-- CSS only -->
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
@@ -28,7 +28,7 @@
             <div id="controls">
               <input type="file" id="input-file" accept="image/*" class="d-none animate__animated animate__fadeIn" >
               <input type="button" id="upload-button" class = "btn btn-secondary btn-sm" value="Upload" onclick="document.getElementById('input-file').click();"/>
-              <div id="paste-button" class="btn btn-secondary btn-sm tt" onclick="pasteImage();" data-bs-placement="right" data-bs-original-title=""><span id="paste-button-label">Paste</span></div>
+              <div id="paste-button" class="btn btn-secondary btn-sm tt" onclick="pasteImage();" data-bs-placement="right" data-bs-original-title=""><span id="">Paste</span></div>
 
               <!-- <div id="paste-button" class="btn btn-secondary btn-sm tt" onclick="console.log('paste button pressed'); pasteImage();" data-bs-placement="right" data-bs-original-title="" ><span class="material-symbols-rounded button-icon">content_paste</span><span id="paste-button-label">Paste</span></div> -->
             </div>
@@ -42,7 +42,154 @@
       </div>
         </div>
 
-
+<!-- Modal -->
+<div class="modal fade" id="supportedFormatsModal" tabindex="-1" aria-labelledby="supportedFormatsModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollabel">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Supported formats</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="row row-of-cards g-3">
+        <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">UPC A</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">UPC E</h6>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="row row-of-cards g-3">
+        <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">EAN 8</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">EAN 13</h6>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="row row-of-cards g-3">
+        <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">Code 39</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">Code 93</h6>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="row row-of-cards g-3">
+        <div class="col gy-3">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">Code 128</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">ITF</h6>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="row row-of-cards g-3">
+        <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">PDF 417</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">Aztec Code</h6>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="row row-of-cards g-3">
+        <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">Data Matrix</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">RSS 14</h6>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="row row-of-cards g-3">
+        <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">RSS Expanded</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">MaxiCode</h6>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="row row-of-cards g-3">
+        <div class="col">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">QR Code</h6>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
 
     </main><!-- /.container -->
 

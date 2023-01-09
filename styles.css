@@ -2,15 +2,34 @@ html, body {
   background-color: #ffffff;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5 {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 600;
   color: #221F26;
 }
 
+h6{
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 400;
+  color: #221F26;
+}
+
 p {
   margin-top: 0;
+  margin-bottom:0;
   font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.card-title {
+  margin-bottom:0;
+}
+
+.row-of-cards {
+  padding-bottom: 1rem;
+}
+
+.modal-body {
+  padding-bottom: 0rem;
 }
 
 .empty-reader-padding{
@@ -19,6 +38,10 @@ p {
 
 .filled-reader-padding{
   padding:.5rem;
+}
+
+#supported-formats-text {
+  color:#721C24;
 }
 
 .subtitle {
@@ -95,13 +118,6 @@ p {
 }
 
 #copy-button {
-  /* color: #ffffff;
-  background-color: #0F5132;
-  border-color: #0F5132;
-  border-radius: 3;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 500; */
-  
   color: #ffffff;
   background-color: #0F5132;
   border-color: #0F5132;
@@ -118,14 +134,23 @@ p {
   padding-right: 8px;
   text-align: left;
   border-width: 1px;
-  margin: 5px;
+  margin-bottom: 3px;
   z-index: 2; 
+  box-shadow: 0px 2px 4px #d6d6d6;
+}
+#copy-button:hover{
+  background-color: #0B3823;
+  border-color: #0B3823;
+  box-shadow: none;
+}
+#copy-button:disabled{
+  box-shadow: none;
 }
 
 #paste-button {
   color: #ffffff;
-  background-color: #585858;
-  border-color: #585858;
+  background-color: #666666;
+  border-color: #666666;
   border-radius: 3;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 500;
@@ -141,13 +166,20 @@ p {
   border-width: 1px;
   margin: 5px;
   z-index: 2; 
+  box-shadow: 0px 2px 4px #d6d6d6;
 }
 
+#paste-button:hover {
+  background-color: #4D4D4D;
+  border-color: #4d4d4d;
+  box-shadow: none;
+
+}
 
 #upload-button {
   color: #ffffff;
-  background-color: #585858;
-  border-color: #585858;
+  background-color: #666666;
+  border-color: #666666;
   border-radius: 3;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 500;
@@ -163,12 +195,14 @@ p {
   border-width: 1px;
   margin: 5px;
   z-index: 2; 
+  box-shadow: 0px 2px 4px #d6d6d6;
 }
 
-  /*does work! */
-/* #upload-button:hover {
-  background-color: #f00;
-} */
+#upload-button:hover {
+  background-color: #4D4D4D;
+  border-color: #4d4d4d;
+  box-shadow: none;
+}
 
 #reset-button {
   background-image: url(/Icons/delete_FILL0_wght400_GRAD0_opsz48\ \(1\).svg);
@@ -182,14 +216,21 @@ p {
   width:32.219px; 
   height:32.219px; 
   color: #ffffff;  
-  background-color: #585858; 
-  border-color: #585858; 
+  background-color: #666666; 
+  border-color: #666666;
   border-radius: 3;
   border-width: 2;
+  box-shadow: 0px 2px 4px #d6d6d6;
+}
+
+#reset-button:hover {
+  background-color: #4D4D4D;
+  border-color: #4d4d4d;
+  box-shadow: none;
 }
 
 .or-drag-labels {
-  color:#757575; 
+  color:#666666; 
   font-weight: 100;
   padding-top:4px;
   margin-bottom: 0px;
