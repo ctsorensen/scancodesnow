@@ -1,13 +1,11 @@
 
 /*
 TODO
-9622030630000157233000680940014097
-- copy button icon
+
 - just pin copy button to right.
 - smallest viewport 320px wide, scale font so one line?
 - Button spacing/sizing consistency. Hover, clicked states for all buttons. 
 - Clean up and annotate JS file
-- Reword: "Pasted data is not an image"
 - download fonts so they don't load in after a second. Annoying.
 - uploading barcode to small screen makes scanning worse (idk what can be done)
 - error messages:
@@ -21,8 +19,8 @@ NOT POSSIBLE
 - allow to right click paste from context menu,
 
 
-Thinkpad
-- on paste, if not an image, show a tooltip. On "Paste" press, and on "cmd + v"
+Acknowledgements:
+- when adding a file, ui jumps b/c col-auto resizing. Wanted to try to maximize the canvas size within reason, so that scanning is more accurate from the library
 */
 
 
@@ -47,8 +45,19 @@ window.addEventListener("load", (event) => {
       container: 'body'
    }));
   });
+
+  // Firefox 1.0+
+  var isFirefox = typeof InstallTrigger !== 'undefined';
+  if (isFirefox){pasteButtonSupported = false;}
+  if (pasteButtonSupported == false){
+      pasteButton.classList.add('d-none');
+    }
+
+  //NOTE, below was to check if clipboard-read is supported (is in all but firefox), removed b/c safari supports it but can't check in this way.
+  //so instead, will just check for firefox to set pasteButtonSupported to true.
   ///check if clipboard-write is supported (all but Firefox)
-    const clipboardReadPermission = navigator.permissions.query({name: 'clipboard-read' })
+  /*  
+  const clipboardReadPermission = navigator.permissions.query({name: 'clipboard-read' })
     .then((permissionObj)=> {
       //check permission object
       if(permissionObj.state === 'granted'){
@@ -78,6 +87,8 @@ window.addEventListener("load", (event) => {
       }
       //console.error("error message: "+error);
     });
+
+    */
   });
 
 fileInput.addEventListener('change', e => {
@@ -93,7 +104,7 @@ fileInput.addEventListener('change', e => {
 
     const tooltip = bootstrap.Tooltip.getInstance(elem);
   
-    elem.setAttribute("data-bs-original-title","Pasted data is not an image");
+    elem.setAttribute("data-bs-original-title","What you pasted is not an image");
     tooltip.show();
     //readerOutline.disabled = true;
     setTimeout(()=>{
@@ -134,8 +145,9 @@ fileInput.addEventListener('change', e => {
       const scanForm = document.getElementById('scan_form');
       const primaryColumn = document.getElementById('primary_column');
       
-      successfulScan.innerHTML = '<p id="scan-success-label">Scan result</p><div id="scan-success"><div class="row"><div class="col my-auto"><p id="scan-success-output">'+decodedText+'</p></div><div class="col-sm-auto align-self-center"><button data-container="body" id="copy-button" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title="">Copy</div></button></div></div>';
-      
+      // successfulScan.innerHTML = '<p id="scan-success-label">Scan result</p><div id="scan-success"><div class="row"><div class="col my-auto"><p id="scan-success-output">'+decodedText+'</p></div><div class="col-sm-auto align-self-center"><button data-container="body" id="copy-button" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title="">Copy</div></button></div></div>';
+      successfulScan.innerHTML = '<div class="row"><div class="col align-self-center"><p id="scan-success-label">Scan result</p></div><div class="col-sm-auto align-self-center"><button data-container="body" id="copy-button" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title="">Copy</div></div></div><div id="scan-success"><div class="row"><div class="col my-auto"><p id="scan-success-output">'+decodedText+'</p></div></div></div>';
+
       primaryColumn.insertBefore(successfulScan, scanForm.nextSibling );
 
       const tooltips = document.querySelectorAll('.tt');
@@ -158,8 +170,9 @@ fileInput.addEventListener('change', e => {
       const scanForm = document.getElementById('scan_form');
       const primaryColumn = document.getElementById('primary_column');
       
-      successfulScan.innerHTML = '<p id="scan-success-label">Scan result</p><div id="scan-success"><div class="row"><div class="col my-auto"><p id="scan-success-output">'+decodedText+'</p></div><div class="col-sm-auto align-self-center"><button data-container="body" id="copy-button" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title="">Copy</div></div></div></div>';
-      
+      // successfulScan.innerHTML = '<p id="scan-success-label">Scan result</p><div id="scan-success"><div class="row"><div class="col my-auto"><p id="scan-success-output">'+decodedText+'</p></div><div class="col-sm-auto align-self-center"><button data-container="body" id="copy-button" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title="">Copy</div></div></div></div>';
+      successfulScan.innerHTML = '<div class="row"><div class="col align-self-center"><p id="scan-success-label">Scan result</p></div><div class="col-sm-auto align-self-center"><button data-container="body" id="copy-button" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title="">Copy</div></div></div><div id="scan-success"><div class="row"><div class="col my-auto"><p id="scan-success-output">'+decodedText+'</p></div></div></div>';
+
       primaryColumn.insertBefore(successfulScan, scanForm.nextSibling );
 
       const tooltips = document.querySelectorAll('.tt');
@@ -243,7 +256,7 @@ async function pasteImage() {
 
         const tooltip = bootstrap.Tooltip.getInstance(elem);
       
-        elem.setAttribute("data-bs-original-title","Pasted data is not an image");
+        elem.setAttribute("data-bs-original-title","What you pasted is not an image");
         tooltip.show();
         //readerOutline.disabled = true;
         setTimeout(()=>{

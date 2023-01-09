@@ -58,7 +58,7 @@ p {
 
 #scan-success-label {
   color: #0F5132;
-  font-size: large;
+  font-size:large;
   font-weight: 600;
   margin-bottom:0;
 }
@@ -101,7 +101,7 @@ p {
   border-radius: 3;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 500; */
-
+  
   color: #ffffff;
   background-color: #0F5132;
   border-color: #0F5132;
@@ -143,6 +143,7 @@ p {
   z-index: 2; 
 }
 
+
 #upload-button {
   color: #ffffff;
   background-color: #585858;
@@ -164,8 +165,13 @@ p {
   z-index: 2; 
 }
 
+  /*does work! */
+/* #upload-button:hover {
+  background-color: #f00;
+} */
+
 #reset-button {
-  background-image: url(/Icons//delete_FILL0_wght400_GRAD0_opsz48\ \(1\).svg);
+  background-image: url(/Icons/delete_FILL0_wght400_GRAD0_opsz48\ \(1\).svg);
   background-size: 24px 24px;
   background-repeat: no-repeat;
   background-position:50%;
