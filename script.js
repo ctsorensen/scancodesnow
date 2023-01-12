@@ -1,9 +1,7 @@
 
 /*
 TODO
-- create scancodesnow.com examples for all formats
 - scan error label alignment is different from scan success
-- just pin copy button to right.
 - smallest viewport 320px wide, scale font so one line?
 - Button spacing/sizing consistency. Hover, clicked states for all buttons. 
 - Clean up and annotate JS file
@@ -50,7 +48,9 @@ window.addEventListener("load", (event) => {
 
   // Firefox 1.0+
   var isFirefox = typeof InstallTrigger !== 'undefined';
-  if (isFirefox){pasteButtonSupported = false;}
+  if (isFirefox){pasteButtonSupported = false;} else {
+    pasteButtonSupported = true;
+  }
   if (pasteButtonSupported == false){
       pasteButton.classList.add('d-none');
     }
@@ -140,15 +140,12 @@ fileInput.addEventListener('change', e => {
 
       const successfulScan = document.createElement("div");
       successfulScan.id = 'scan-success-section';
-      // successfulScan.style.minWidth = '100%';
-      // successfulScan.style.width = '0';
      
       successfulScan.classList = 'animate__animated animate__fadeInDown';
       const scanForm = document.getElementById('scan_form');
       const primaryColumn = document.getElementById('primary_column');
       
-      // successfulScan.innerHTML = '<p id="scan-success-label">Scan result</p><div id="scan-success"><div class="row"><div class="col my-auto"><p id="scan-success-output">'+decodedText+'</p></div><div class="col-sm-auto align-self-center"><button data-container="body" id="copy-button" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title="">Copy</div></button></div></div>';
-      successfulScan.innerHTML = '<div class="row"><div class="col align-self-center"><p id="scan-success-label">Scan result</p></div><div class="col-sm-auto align-self-center"><button data-container="body" id="copy-button" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title="">Copy</div></div></div><div id="scan-success"><div class="row"><div class="col my-auto"><p id="scan-success-output">'+decodedText+'</p></div></div></div>';
+      successfulScan.innerHTML = '<div class="row"><div class="col align-self-center"><p id="scan-success-label">Scan result</p></div><div class="col-auto align-self-center"><button data-container="body" id="copy-button" class="btn btn-secondary btn-sm tt text-end" onclick="copyScanOutput();" data-bs-placement="top" data-bs-original-title= "" title="">Copy</div></div></div><div id="scan-success"><div class="row"><div class="col my-auto"><p id="scan-success-output">'+decodedText+'</p></div></div></div>';
 
       primaryColumn.insertBefore(successfulScan, scanForm.nextSibling );
 
@@ -247,7 +244,7 @@ async function pasteImage() {
   // function for paste button.
   
   console.log("pasteImage");
-  console.log('is paste button supported?: '+pasteButtonSupported.toString());
+  // console.log('is paste button supported?: '+pasteButtonSupported.toString());
 
   try {
     console.log('try1');

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="The free, fast, and easy way to scan QR codes and barcodes online! No app required. Paste or upload a barcode image to read it instantly. Barcode reader supports QR Code, Code 128, Code 39, PDF 417, EAN 8, EAN 13, ITF, Aztec Code, Data Matrix, and RSS 14.">
+    <meta name="description" content="The free, fast, and easy way to scan QR codes and barcodes online! No app required. Paste or upload a barcode image to read it instantly. Barcode reader supports UPC A, UPC E, Code 128, Code 39, PDF 417, EAN 8, EAN 13, QR Code, ITF, Aztec Code, Data Matrix, and RSS 14.">
 
     <meta name="author" content="">
     <!-- CSS only -->
@@ -19,7 +19,9 @@
 <body>
     <main role="main" class="container">
       <div class="row" id="main-row">
-        <div class="col-auto" id="primary_column"> 
+          <div class="col-auto"></div>
+        <!-- <div class="col-auto" id="primary_column">  -->
+          <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12" id="primary_column"> 
           <h2>Barcode & QR code scanner
           </h2>
           <p class="subtitle">Upload or paste a barcode image to read</p>          
@@ -40,8 +42,10 @@
             </div>
         </form>
       
-      </div>
-        </div>
+      
+          </div>
+          <div class="col-auto"></div>    
+    </div>
 
 <!-- Modal -->
 <div class="modal fade" id="supportedFormatsModal" tabindex="-1" aria-labelledby="supportedFormatsModal" aria-hidden="true">
@@ -52,10 +56,28 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <div class="row row-of-cards g-3">
+          <div class="col">
+          <div class="card">
+            <img src="/Images/UPC A.png" class="card-img-top" alt="Example of UPC-A barcode">
+            <div class="card-body">
+              <h6 class="card-title">UPC-A</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="/Images/UPC E.png" class="card-img-top" alt="Example of UPC-E barcode">
+            <div class="card-body">
+              <h6 class="card-title">UPC-E</h6>
+            </div>
+          </div>
+        </div>
+        </div>
       <div class="row row-of-cards g-3">
         <div class="col">
         <div class="card">
-          <img src="/Images/Code-128.png" class="card-img-top" alt="...">
+          <img src="/Images/Code-128.png" class="card-img-top" alt="Example of Code 128 barcode">
           <div class="card-body">
             <h6 class="card-title">Code 128</h6>
           </div>
@@ -63,7 +85,7 @@
       </div>
       <div class="col">
         <div class="card">
-          <img src="/Images/Code-39.png" class="card-img-top" alt="...">
+          <img src="/Images/Code-39.png" class="card-img-top" alt="Example of Code 39 barcode">
           <div class="card-body">
             <h6 class="card-title">Code 39</h6>
           </div>
@@ -73,15 +95,15 @@
       <div class="row row-of-cards g-3">
         <div class="col">
         <div class="card">
-          <img src="/Images/PDF-417.png" class="card-img-top" alt="...">
+          <img src="/Images/PDF-417.png" class="card-img-top" alt="Example of PDF417 barcode">
           <div class="card-body">
-            <h6 class="card-title">PDF 417</h6>
+            <h6 class="card-title">PDF417</h6>
           </div>
         </div>
       </div>
       <div class="col">
         <div class="card">
-          <img src="/Images/QR Code.png" class="card-img-top" alt="...">
+          <img src="/Images/QR Code.png" class="card-img-top" alt="Example of QR Code">
           <div class="card-body">
             <h6 class="card-title">QR Code</h6>
           </div>
@@ -91,17 +113,17 @@
       <div class="row row-of-cards g-3">
         <div class="col">
         <div class="card">
-          <img src="/Images/EAN-8.png" class="card-img-top" alt="...">
+          <img src="/Images/EAN-8.png" class="card-img-top" alt="Example of EAN-8 barcode">
           <div class="card-body">
-            <h6 class="card-title">EAN 8</h6>
+            <h6 class="card-title">EAN-8</h6>
           </div>
         </div>
       </div>
       <div class="col">
         <div class="card">
-          <img src="/Images/EAN-13.png" class="card-img-top" alt="...">
+          <img src="/Images/EAN-13.png" class="card-img-top" alt="Example of EAN-13 barcode">
           <div class="card-body">
-            <h6 class="card-title">EAN 13</h6>
+            <h6 class="card-title">EAN-13</h6>
           </div>
         </div>
       </div>
@@ -109,7 +131,7 @@
       <div class="row row-of-cards g-3">
         <div class="col gy-3">
         <div class="card">
-          <img src="/Images/ITF.png" class="card-img-top" alt="...">
+          <img src="/Images/ITF.png" class="card-img-top" alt="Example of ITF barcode">
           <div class="card-body">
             <h6 class="card-title">ITF</h6>
           </div>
@@ -117,7 +139,7 @@
       </div>
       <div class="col">
         <div class="card">
-          <img src="/Images/Aztec.png" class="card-img-top" alt="...">
+          <img src="/Images/Aztec.png" class="card-img-top" alt="Example of AZTEC Code">
           <div class="card-body">
             <h6 class="card-title">AZTEC Code</h6>
           </div>
@@ -127,7 +149,7 @@
       <div class="row row-of-cards g-3">
         <div class="col">
         <div class="card">
-          <img src="/Images/DataMatrix.png" class="card-img-top" alt="...">
+          <img src="/Images/DataMatrix.png" class="card-img-top" alt="Example of Data Matrix code">
           <div class="card-body">
             <h6 class="card-title">Data Matrix</h6>
           </div>
@@ -135,7 +157,7 @@
       </div>
       <div class="col">
         <div class="card">
-          <img src="/Images/RSS14.png" class="card-img-top" alt="...">
+          <img src="/Images/RSS14.png" class="card-img-top" alt="Example of RSS 14 barcode">
           <div class="card-body">
             <h6 class="card-title">RSS 14</h6>
           </div>
