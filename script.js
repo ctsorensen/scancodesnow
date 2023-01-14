@@ -1,7 +1,6 @@
 
 /*
 TODO
-- scan error label alignment is different from scan success
 - smallest viewport 320px wide, scale font so one line?
 - Button spacing/sizing consistency. Hover, clicked states for all buttons. 
 - Clean up and annotate JS file

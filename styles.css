@@ -1,5 +1,6 @@
 html, body {
   background-color: #ffffff;
+  /*Not an off-white because most barcode images have white in background. Blends better. This isn't a utility where eye strain is a big concern.*/
 }
 
 h1, h2, h3, h4, h5 {
@@ -139,8 +140,8 @@ p {
   box-shadow: 0px 2px 4px #d6d6d6;
 }
 #copy-button:hover{
-  background-color: #0B3823;
-  border-color: #0B3823;
+  background-color: #0D4229;
+  border-color: #0D4229;
   box-shadow: none;
 }
 #copy-button:disabled{
@@ -253,7 +254,8 @@ p {
   border-radius: 5px; 
   border-color: #dedede; 
   border-width: 2px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
+
   z-index: 1;
   }
   
