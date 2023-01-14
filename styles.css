@@ -9,6 +9,30 @@ h1, h2, h3, h4, h5 {
   color: #221F26;
 }
 
+h3 {
+  font-size: 2.0rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+@media screen and (max-width: 340px) {
+  h3 {
+    font-size: calc(1.3rem + .3vw);
+  }
+  .subtitle {
+    font-size: 0.94rem;
+    color: #221F26;
+    margin-bottom: 12px;
+  }
+}
+
+.larger-line-height{
+  line-height: normal + 10px;
+}
+
 h6{
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 400;
@@ -45,11 +69,6 @@ p {
   color:#721C24;
 }
 
-.subtitle {
-  font-size: 1.0rem;
-  color: #221F26;
-  /* font-weight: 400; */
-}
 
 .button-icon {
   vertical-align: middle;
