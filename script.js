@@ -37,7 +37,7 @@ fileInput.addEventListener('change', e => {
   if (e.target.files.length == 0) {
     const elem = document.getElementById('reader');
     const tooltip = bootstrap.Tooltip.getInstance(elem);
-    elem.setAttribute("data-bs-original-title","What you pasted is not an image");
+    elem.setAttribute("data-bs-original-title","What you pasted \n is not an image");
     tooltip.show();
     setTimeout(()=>{
       tooltip.hide();
@@ -138,7 +138,7 @@ async function pasteImage() {
       if (!item.types.includes('image/png')) {
         const elem = document.getElementById('paste-button');
         const tooltip = bootstrap.Tooltip.getInstance(elem);
-        elem.setAttribute("data-bs-original-title","What you pasted is not an image");
+        elem.setAttribute("data-bs-original-title","What you pasted \n is not an image");
         tooltip.show();
         setTimeout(()=>{
           tooltip.hide();

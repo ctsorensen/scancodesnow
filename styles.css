@@ -18,6 +18,10 @@ h3 {
   margin-bottom: 12px;
 }
 
+.tooltip-inner {
+  white-space:pre-wrap;
+}
+
 @media screen and (max-width: 768px) {
   h3 {
     font-size: calc(1.8rem + .3vw);
