@@ -8,7 +8,7 @@ var VideoConstraintsUtil = (function () {
         if (typeof videoConstraints !== "object") {
             var typeofVideoConstraints = typeof videoConstraints;
             logger.logError("videoConstraints should be of type object, the "
-                + ("object passed is of type " + typeofVideoConstraints + "."), true);
+                + "object passed is of type ".concat(typeofVideoConstraints, "."), true);
             return false;
         }
         var bannedKeys = [
@@ -26,7 +26,7 @@ var VideoConstraintsUtil = (function () {
         for (var _i = 0, keysInVideoConstraints_1 = keysInVideoConstraints; _i < keysInVideoConstraints_1.length; _i++) {
             var key = keysInVideoConstraints_1[_i];
             if (bannedkeysSet.has(key)) {
-                logger.logError(key + " is not supported videoConstaints.", true);
+                logger.logError("".concat(key, " is not supported videoConstaints."), true);
                 return false;
             }
         }
